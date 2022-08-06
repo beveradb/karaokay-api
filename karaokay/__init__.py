@@ -1,0 +1,1 @@
+"""karaokay package."""

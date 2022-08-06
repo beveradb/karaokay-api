@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+    image: karaokay:${KARAOKAY_VERSION:-latest}
+    restart: always
+    env_file:
+    - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      KARAOKAY_HOST: 0.0.0.0
+      KARAOKAY_DB_HOST: karaokay-db
+      KARAOKAY_DB_PORT: 3306
+      KARAOKAY_DB_USER: karaokay
+      KARAOKAY_DB_PASS: karaokay
+      KARAOKAY_DB_BASE: karaokay
+
+  db:
+    image: bitnami/mysql:8.0.28
+    hostname: karaokay-db
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: "karaokay"
+      MYSQL_ROOT_PASSWORD: "karaokay"
+      MYSQL_DATABASE: "karaokay"
+      MYSQL_AUTHENTICATION_PLUGIN: "mysql_native_password"
+    healthcheck:
+      test: mysqladmin ping -h localhost
+      interval: 10s
+      timeout: 5s
+      retries: 40
+    volumes:
+    - karaokay-db-data:/bitnami/mysql/data
+
+
+
+volumes:
+  karaokay-db-data:
+    name: karaokay-db-data
