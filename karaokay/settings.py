@@ -23,23 +23,32 @@ class Settings(BaseSettings):
     """
     Application settings.
 
-    These parameters can be configured
-    with environment variables.
+    These parameters are just default values - they can be configured
+    with environment variables, prefixed as per inline examples below.
     """
 
+    # env var: KARAOKAY_HOST
     host: str = "127.0.0.1"
+    # env var: KARAOKAY_PORT
     port: int = 8000
-    # quantity of workers for uvicorn
+    # quantity of workers for uvicorn  | env var: KARAOKAY_WORKERS_COUNT
     workers_count: int = 1
-    # Enable uvicorn reloading
+    # Enable uvicorn reloading | env var: KARAOKAY_RELOAD
     reload: bool = False
 
-    # Current environment
+    # Current environment | env var: KARAOKAY_ENVIRONMENT
     environment: str = "dev"
 
+    # env var: KARAOKAY_LOG_LEVEL
     log_level: LogLevel = LogLevel.INFO
 
+    # env var: KARAOKAY_LASTFM_API_KEY
+    lastfm_api_key: str = "test"
+    # env var: KARAOKAY_LASTFM_API_SECRET
+    lastfm_api_secret: str = "test"
+
     # Variables for the database
+    # env var: KARAOKAY_DB_HOST / KARAOKAY_DB_PORT / KARAOKAY_DB_USER / KARAOKAY_DB_PASS
     db_host: str = "localhost"
     db_port: int = 3306
     db_user: str = "karaokay"

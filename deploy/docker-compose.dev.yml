@@ -11,6 +11,7 @@ services:
     environment:
       # Enables autoreload.
       KARAOKAY_RELOAD: "True"
+      KARAOKAY_LOG_LEVEL: "DEBUG"
 
   db:
     ports:

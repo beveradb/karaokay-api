@@ -5,10 +5,10 @@ class Query(BaseModel):
     """Simple Query model."""
 
     username: str
+    params: dict
 
 
-class Response(BaseModel):
-    """Simple Response model."""
+class RecentTracks(BaseModel):
+    """Simple RecentTracks model."""
 
-    message: str
-    username: str
+    tracks: list
